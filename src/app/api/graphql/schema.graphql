@@ -1,0 +1,88 @@
+enum Roles {
+  ADMIN
+  USER
+  GUEST
+}
+
+input CreateUserRequest {
+  name: String!
+  email: String!
+  phone: String!
+  role: Roles
+  password: String!
+}
+
+input EditUserRequest {
+  id: ID!
+  name: String!
+  role: Roles
+}
+
+type CreateUserResponse {
+  msg: String!
+}
+
+type ListTransactionsResponse {
+  transactions: [Transaction]!
+  total: Float!
+  msg: String!
+}
+
+type EditUserResponse {
+  msg: String!
+}
+
+input CreateTransactionInput {
+  amount: Float!
+  concept: String!
+  type: String!
+  date: String!
+}
+
+input EditTransactionInput {
+  amount: Float!
+  concept: String!
+  type: String!
+  date: String!
+}
+
+type CreateTransactionResponse {
+  msg: String!
+}
+
+type EditTransactionResponse {
+  msg: String!
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  phone: String!
+  roles: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Transaction {
+  id: ID!
+  amount: Float!
+  concept: String!
+  date: String!
+  user: User!
+  createdAt: String
+  updatedAt: String
+}
+
+
+type Query {
+  users: [User]!
+  listTransactions: ListTransactionsResponse!
+}
+
+type Mutation {
+  createUser(input: CreateUserRequest!): CreateUserResponse!
+  createTransaction(input: CreateTransactionInput!): CreateTransactionResponse!
+  editTransaction(input: EditTransactionInput!): EditTransactionResponse!
+  editUser(input: EditUserRequest!): EditUserResponse!
+}
